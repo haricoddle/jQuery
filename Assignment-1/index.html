@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment-1</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <form action="/" id="validationform">
+            <label for="name">Name:-</label>
+            <input type="text" id="name" name="name">
+            <div id="errorName" class="error"></div>
+
+            <label for="address">Address:-</label>
+            <textarea id="address" name="address"></textarea>
+            <div id="errorAddress" class="error"></div>
+
+            <label for="date">D.O.B:-</label>
+            <input type="date" id="date" name="date">
+            <div id="errorDate" class="error"></div>
+
+            <label for="age">Age:-</label>
+            <select name="age" id="age">
+                <option value="">Select age</option>
+                <option value="10-18">10-18</option>
+                <option value="19-25">19-25</option>
+                <option value="26-35">26-35</option>
+                <option value="36-50">36-50</option>
+                <option value="50+">50+</option>
+            </select>
+            <div id="errorAge" class="error"></div>
+
+            <label for="gender">Gender:-</label>
+            <input type="radio" name="gender" id="male" value="male">
+            <label for="male">Male</label>
+
+            <input type="radio" name="gender" id="female" value="female">
+            <label for="female">Female</label>
+            <div id="errorGender" class="error"></div>
+            <label for="terms">Agree to terms</label>
+            <input type="checkbox" name="terms" id="terms">
+            <div id="errorTerms" class="error"></div>
+
+            <input type="submit" id="submit">
+        </form>
+    </div>
+    <script src="jquery/jquery.js"></script>
+    <script defer src="js/main.js"></script>
+</body>
+</html>
