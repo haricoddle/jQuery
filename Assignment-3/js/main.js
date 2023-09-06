@@ -36,7 +36,7 @@ $(document).ready(function () {
                     class: 'btn2'
                 })
             );
-            $('.btn2').click(function () {
+            $('.btn2').one('click',function () {
                 $('.img1').fadeOut();
                 $('.imageContainer').append(
                     $(document.createElement('img')).prop({
