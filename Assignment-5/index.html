@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment-5</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <p>CART</p>
+
+        <select id="filter" name="filterProducts">
+            <option value="">Filter items</option>
+            <option value="smartphones">Smartphones</option>
+            <option value="laptops">Laptops</option>
+            <option value="fragrances">Fragrances</option>  
+            <option value="skincare">Skincare</option>  
+            <option value="groceries">Groceries</option>  
+            <option value="home-decoration">Home-Decoration</option>  
+        </select>
+
+        <input type="text" placeholder="Search here--->>" id="searchbar">
+
+        <select id="sort" name="sortProducts">
+            <option value="">Sort items</option>
+            <option value="hightolow">High-To-Low</option>
+            <option value="lowtohigh">Low-To-High</option>
+            <option value="ratings">Ratings</option>  
+        </select>
+
+        <i class="fa fa-shopping-bag" id="cartLogo"></i>
+    </nav>
+    <section class="displaySec">
+        <div class="container"></div>
+        <aside class="cartArea">
+            <p>Cart</p>
+            <div class="cartItems"></div>
+            <p>CheckOut</p>
+        </aside>
+    </section>
+    <script src="jquery/jquery.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+*{
+    padding: 0;
+    margin: 0;
+    z-index: 0;
+}
+.conatiner{
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto;
+    gap: 2rem;
+}
+nav{
+    display: flex;
+    height: 80px;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(5, 15, 31);
+    color: white;
+}
+nav input{
+    height: 30px;
+    width: 300px;
+}
+.cartArea{
+    width: 300px;
+    background-color: whitesmoke;
+    text-align: center;
+    position: fixed;
+    top: 80px;
+    right: 0;
+    z-index: 3 ;
+}
+.cartArea p{
+    height: 35px;
+    background-color: rgb(5, 15, 31);
+    color: rgb(205, 152, 54);
+    font-size: 1.2rem;
+}
+.cartItems{
+    margin-block: 15px;
+    color: black;
+}
+.items{
+    display: flex;
+    column-gap: 2rem;
+    box-shadow: 0 0 50px rgb(63, 62, 62);
+    margin-inline: 15px;
+    width: 90%;
+    margin: auto;
+    margin-block: 2rem;
+    overflow: hidden;
+    color: whitesmoke;
+    background-color: rgb(5, 15, 31);
+}
+.thumb{
+    width: 500px;
+    height: 400px;
+    object-fit: cover;
+}
+.nameDet{
+    border: 1px  solid black;
+}
+.contentdiv{
+    display: flex;
+    margin-top: 50px;
+    flex-direction: column;
+    row-gap: 2rem;
+}
+.contentdiv button{
+    padding: 5px 5px;
+    width: 150px;
+    background-color: rgb(243, 173, 43);
+    border: none;
+}
+.desc{
+    width: 310px;
+}
+.displaydiv{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1.5rem;
+}
+.displaydiv img{
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+}
+.cartItemsDiv p{
+    background-color: whitesmoke;
+    color:  rgb(243, 173, 43);
+}
+.itemQuantity{
+    margin-inline: 25px;
+}
