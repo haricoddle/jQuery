@@ -71,6 +71,7 @@ nav input{
     width: 150px;
     background-color: rgb(243, 173, 43);
     border: none;
+    margin-left: 50px;
 }
 .desc{
     width: 310px;
@@ -88,7 +89,4 @@ nav input{
 .cartItemsDiv p{
     background-color: whitesmoke;
     color:  rgb(243, 173, 43);
-}
-.itemQuantity{
-    margin-inline: 25px;
 }
