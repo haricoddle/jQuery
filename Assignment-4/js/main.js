@@ -12,7 +12,7 @@ $(document).ready(function () {
                 $(this).show();
             } else {
                 $(this).hide();
-                // $('#searchError').html('<h1>Element not found</h1>')
+                // $('#searchError').html('<h1>Element not found</h1>');
             }
         });
     });
