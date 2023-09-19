@@ -6,16 +6,23 @@ $(document).ready(function () {
 
     $('#searchbar').on('input', function () {
         const searchText = $(this).val().toLowerCase();
-        console.log(searchText)
-        $('.items').each(function () {
-            const itemTitle = $(this).find('.title').text().toLowerCase();
-            if (itemTitle.includes(searchText)) {
-                $(this).show();
-            } else {
-                $(this).hide();
+        console.log(searchText);
+        $('.container').empty();
+        if (searchText === '') {
+            for (let i = 0; i < productData.length; i++) {
+                bodyContents(productData[i]);
             }
-        });
+        } else {
+            for (let i = 0; i < productData.length; i++) {
+                $(window).unbind()
+                const itemTitle = productData[i]['title'].toLowerCase();
+                if (itemTitle.includes(searchText)) {
+                    bodyContents(productData[i]);
+                }
+            }
+        }
     });
+
 
     $('#sort').on('change', function () {
         const selectedSortOption = $(this).val();
