@@ -88,6 +88,8 @@ $(document).ready(function () {
         currentPage++;
     }
 
+    let totalAmount = 0;
+
     function bodyContents(product) {
         let disPrice = product['price'] - ((product['price'] * product['discountPercentage']) / 100);
         $('.container').append(
@@ -188,18 +190,27 @@ $(document).ready(function () {
                 class: 'dispImg img' + product['id']
             })
         );
-
         $(`.add${product['id']}`).on('click', function (e) {
             let className = $(e.target.parentElement.parentElement).find('h2').text();
-
+            let amtArea = $('.TotalAmt');
+            let priceAmt = parseFloat($(e.target.parentElement).find('.disPrice').text().split('Discount Price :- ')[1]);
             let existingCartItem = $('.cartItemsDiv:contains(' + className + ')');
             console.log(existingCartItem)
             if (existingCartItem.length > 0) {
                 let itemQuantity = existingCartItem.find('.itemQuantity');
                 let itemCount = parseInt(itemQuantity.text());
-                itemCount++;
+                ++itemCount;
+                console.log(itemCount)
                 itemQuantity.text(itemCount);
+                console.log(priceAmt)
+                console.log(totalAmount)
+                totalAmount += priceAmt;
+                console.log(totalAmount)
+                amtArea.text(totalAmount.toFixed(2));
             } else {
+                totalAmount += priceAmt;
+                console.log(totalAmount)
+                amtArea.text(totalAmount.toFixed(2));
                 $('.cartItems').append(
                     $(document.createElement('div')).prop({
                         type: 'div',
@@ -246,13 +257,19 @@ $(document).ready(function () {
                     let itemQuantity = $(e.target).siblings('.itemQuantity');
                     let itemCount = parseInt(itemQuantity.text());
                     itemCount++;
+                    console.log(itemCount)
                     itemQuantity.text(itemCount);
+                    totalAmount += priceAmt;
+                    amtArea.text(totalAmount.toFixed(2));
                 });
 
                 $('.decre' + (count - 1)).on('click', function (e) {
                     let itemQuantity = $(e.target).siblings('.itemQuantity');
                     let itemCount = parseInt(itemQuantity.text());
                     itemCount--;
+                    console.log(itemCount)
+                    totalAmount -= priceAmt;
+                    amtArea.text(totalAmount.toFixed(2));
 
                     if (itemCount === 0) {
                         $(e.target).closest('.cartItemsDiv').remove();
