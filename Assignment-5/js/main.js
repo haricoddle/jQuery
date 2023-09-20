@@ -3,26 +3,36 @@ $(document).ready(function () {
     $('#cartLogo').on('click', function () {
         $('.cartArea').toggle(1000);
     })
-
     $('#searchbar').on('input', function () {
         const searchText = $(this).val().toLowerCase();
         console.log(searchText);
-        $('.container').empty();
-        if (searchText === '') {
-            for (let i = 0; i < productData.length; i++) {
-                bodyContents(productData[i]);
-            }
-        } else {
-            for (let i = 0; i < productData.length; i++) {
-                $(window).unbind()
-                const itemTitle = productData[i]['title'].toLowerCase();
-                if (itemTitle.includes(searchText)) {
+
+        if (categoryCheck === undefined) {
+            $('.container').empty(); 
+            if (searchText === '') {
+                for (let i = 0; i < productData.length; i++) {
                     bodyContents(productData[i]);
                 }
+                console.log('nothing is searched')
+            } else {
+                for (let i = 0; i < productData.length; i++) {
+                    const itemTitle = productData[i]['title'].toLowerCase();
+                    if (itemTitle.includes(searchText)) {
+                        bodyContents(productData[i]);
+                    }
+                }
             }
+        } else {
+            $('.items').each(function () {
+                const itemTitle = $(this).find('.title').text().toLowerCase();
+                if (itemTitle.includes(searchText)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
         }
     });
-
 
     $('#sort').on('change', function () {
         const selectedSortOption = $(this).val();
@@ -62,9 +72,10 @@ $(document).ready(function () {
         productData = data.products;
         appendNextItems();
     })
-
+    let categoryCheck;
     $('#filter').on('change', function (e) {
         const selectedCategory = e.target.value;
+        categoryCheck = selectedCategory;
         $(window).unbind();
         $('.container').empty();
         for (let i = 0; i < productData.length; i++) {
