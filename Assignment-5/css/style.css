@@ -25,7 +25,7 @@ nav input{
     width: 300px;
     background-color: whitesmoke;
     text-align: center;
-    position: fixed;
+    position: absolute;
     top: 80px;
     right: 0;
     z-index: 3 ;
@@ -89,4 +89,12 @@ nav input{
 .cartItemsDiv p{
     background-color: whitesmoke;
     color:  rgb(243, 173, 43);
+}
+.cartItemsDiv p:last-child{
+    display: flex;
+    justify-content: space-evenly;
+}
+.cartItemsDiv p:last-child button{
+    padding: 5px 10px;
+    font-size: 1.2rem;
 }

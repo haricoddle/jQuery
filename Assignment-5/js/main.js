@@ -3,22 +3,65 @@ $(document).ready(function () {
     $('#cartLogo').on('click', function () {
         $('.cartArea').toggle(1000);
     })
-
     $('#searchbar').on('input', function () {
         const searchText = $(this).val().toLowerCase();
-        console.log(searchText)
-        $('.items').each(function () {
-            const itemTitle = $(this).find('.title').text().toLowerCase();
-            if (itemTitle.includes(searchText)) {
-                $(this).show();
+        console.log(searchText);
+
+        if (categoryCheck === undefined) {
+            $('.container').empty(); 
+            if (searchText === '') {
+                for (let i = 0; i < productData.length; i++) {
+                    bodyContents(productData[i]);
+                }
+                console.log('nothing is searched')
             } else {
-                $(this).hide();
+                for (let i = 0; i < productData.length; i++) {
+                    const itemTitle = productData[i]['title'].toLowerCase();
+                    if (itemTitle.includes(searchText)) {
+                        bodyContents(productData[i]);
+                    }
+                }
             }
-        });
+        } else {
+            $('.items').each(function () {
+                const itemTitle = $(this).find('.title').text().toLowerCase();
+                if (itemTitle.includes(searchText)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
     });
 
     $('#sort').on('change', function () {
         const selectedSortOption = $(this).val();
+        if(categoryCheck === undefined) {
+        switch (selectedSortOption) {
+            case 'hightolow':
+                productData.sort(function (a, b) {
+                    return b['price'] - a['price'];
+                });
+                break;
+            case 'lowtohigh':
+                productData.sort(function (a, b) {
+                    return a['price'] - b['price']; 
+                });
+                break;
+            case 'ratings':
+                productData.sort(function (a, b) {
+                    return b['rating'] - a['rating']; 
+                });
+                break;
+            default:
+                break;
+        }
+        $('.container').empty();
+
+        for (let i = 0; i < productData.length; i++) {
+            bodyContents(productData[i]);
+        }
+    } else {
         switch (selectedSortOption) {
             case 'hightolow':
                 $('.items').sort(function (a, b) {
@@ -44,7 +87,9 @@ $(document).ready(function () {
             default:
                 break;
         }
+    }
     });
+
 
     let data;
     let productData;
@@ -55,9 +100,10 @@ $(document).ready(function () {
         productData = data.products;
         appendNextItems();
     })
-
+    let categoryCheck;
     $('#filter').on('change', function (e) {
         const selectedCategory = e.target.value;
+        categoryCheck = selectedCategory;
         $(window).unbind();
         $('.container').empty();
         for (let i = 0; i < productData.length; i++) {
@@ -87,6 +133,8 @@ $(document).ready(function () {
         }
         currentPage++;
     }
+
+    let totalAmount = 0;
 
     function bodyContents(product) {
         let disPrice = product['price'] - ((product['price'] * product['discountPercentage']) / 100);
@@ -188,18 +236,27 @@ $(document).ready(function () {
                 class: 'dispImg img' + product['id']
             })
         );
-
         $(`.add${product['id']}`).on('click', function (e) {
             let className = $(e.target.parentElement.parentElement).find('h2').text();
-
+            let amtArea = $('.TotalAmt');
+            let priceAmt = parseFloat($(e.target.parentElement).find('.disPrice').text().split('Discount Price :- ')[1]);
             let existingCartItem = $('.cartItemsDiv:contains(' + className + ')');
             console.log(existingCartItem)
             if (existingCartItem.length > 0) {
                 let itemQuantity = existingCartItem.find('.itemQuantity');
                 let itemCount = parseInt(itemQuantity.text());
-                itemCount++;
+                ++itemCount;
+                console.log(itemCount)
                 itemQuantity.text(itemCount);
+                console.log(priceAmt)
+                console.log(totalAmount)
+                totalAmount += priceAmt;
+                console.log(totalAmount)
+                amtArea.text(totalAmount.toFixed(2));
             } else {
+                totalAmount += priceAmt;
+                console.log(totalAmount)
+                amtArea.text(totalAmount.toFixed(2));
                 $('.cartItems').append(
                     $(document.createElement('div')).prop({
                         type: 'div',
@@ -246,13 +303,19 @@ $(document).ready(function () {
                     let itemQuantity = $(e.target).siblings('.itemQuantity');
                     let itemCount = parseInt(itemQuantity.text());
                     itemCount++;
+                    console.log(itemCount)
                     itemQuantity.text(itemCount);
+                    totalAmount += priceAmt;
+                    amtArea.text(totalAmount.toFixed(2));
                 });
 
                 $('.decre' + (count - 1)).on('click', function (e) {
                     let itemQuantity = $(e.target).siblings('.itemQuantity');
                     let itemCount = parseInt(itemQuantity.text());
                     itemCount--;
+                    console.log(itemCount)
+                    totalAmount -= priceAmt;
+                    amtArea.text(totalAmount.toFixed(2));
 
                     if (itemCount === 0) {
                         $(e.target).closest('.cartItemsDiv').remove();
